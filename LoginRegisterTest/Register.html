@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://unpkg.com/missing.css">
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+    <script src="/LoginRegisterTest/JS/validation.js" defer></script>
     <title>Signup</title>
 </head>
 <body>
@@ -12,7 +14,7 @@
         <div class="form-box signup">
         <h2>Signup</h2>
             
-        <form action="process-signup.php" method="post" novalidate>
+        <form action="process-signup.php" method="post" id="signup"novalidate>
             <div>
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name">
