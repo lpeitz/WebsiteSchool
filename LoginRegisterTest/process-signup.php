@@ -28,6 +28,17 @@ $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 $mysqli = require __DIR__ . "/database.php";
 
+
+$query = "SELECT * FROM user WHERE email = ?";
+$stmt = $mysqli->prepare($query);
+$stmt->bind_param("s", $_POST["email"]);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    die("email already taken");
+}
+
 $sql = "INSERT INTO user (name, email, password_hash)
         VALUES (?, ?, ?)";
         
@@ -44,21 +55,16 @@ $stmt->bind_param("sss",
                   
 if ($stmt->execute()) {
 
-    header("Location: signup-success.html");
+    header("Location: register-success.html");
     exit;
-    
+
 } else {
     
-    if ($mysqli->errno === 1062) {
-        die("email already taken");
-    } else {
-        die($mysqli->error . " " . $mysqli->errno);
-    }
+    die($mysqli->error . " " . $mysqli->errno);
+
 }
 
+$stmt->close();
+$mysqli->close();
 
-
-
-
-
-
+?>
