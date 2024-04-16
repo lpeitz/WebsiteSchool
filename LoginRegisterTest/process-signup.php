@@ -55,7 +55,7 @@ $stmt->bind_param("sss",
                   
 if ($stmt->execute()) {
 
-    header("Location: register-success.html");
+    header("Location: signup-success.html");
     exit;
 
 } else {

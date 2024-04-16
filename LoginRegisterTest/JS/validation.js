@@ -3,24 +3,32 @@ const validation = new JustValidate("#signup");
 validation
     .addField("#name", [
         {
-            rule: "required",
-            errorMessage: "Name is required"
+            rule: "required"
         }
     ])
     .addField("#email", [
         {
-            rule: "required",
-            errorMessage: "E-Mail is required"
+            rule: "required"
         },
         {
-            rule: "email",
-            errorMessage: "E-Mail is invalid!"
+            rule: "email"
+        },
+        {
+            validator: (value) => () => {
+                return fetch("validate-email.php?email=" + encodeURIComponent(value))
+                       .then(function(response) {
+                           return response.json();
+                       })
+                       .then(function(json) {
+                           return json.available;
+                       });
+            },
+            errorMessage: "email already taken"
         }
     ])
     .addField("#password", [
         {
-            rule: "required",
-            errorMessage: "Password is required"
+            rule: "required"
         },
         {
             rule: "password"
@@ -28,17 +36,25 @@ validation
     ])
     .addField("#password_confirmation", [
         {
-            validator: (value, fields) => 
-            {
-                if (value!== fields["#password"].elem.value) {
-                    return false;
-                }
-                return true;
+            validator: (value, fields) => {
+                return value === fields["#password"].elem.value;
             },
-            errorMessage: "Passwords should match"
+            errorMessage: "Passwords must match"
         }
     ])
     .onSuccess((event) => {
-       document.getElementById("regster").submit();
+        document.getElementById("signup").submit();
     });
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

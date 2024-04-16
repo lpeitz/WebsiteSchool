@@ -32,7 +32,7 @@ if (isset($_SESSION["user_id"]))
         <p>Hello <?= htmlspecialchars($user["name"]) ?></p>
         <p><a href="logout.php">Logout</a></p>
     <?php else: ?>
-        <p><a href="login.php">Login</a> or <a href="register.html">Register</a></p>
+        <p><a href="login.php">Login</a> or <a href="signup.html">Register</a></p>
     <?php endif; ?>
 
 </body>
