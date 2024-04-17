@@ -46,15 +46,4 @@ validation
         document.getElementById("signup").submit();
     });
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
