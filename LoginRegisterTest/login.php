@@ -45,10 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
 
         <div class="container">
             <div class="form-box login">
+            
             <h2>Login</h2>
+
             <?php if ($is_invalid): ?>
                 <em>Invalid login</em>
             <?php endif; ?>
+
                 <form method="post">
                     <label for="email">E-Mail</label>
                     <input type="email" name="email" id="email"
@@ -58,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                     <input type="password" name="password" id="password">
 
                     <button> Log in</button>
-    
                 </form>
             </div>
         </div>

@@ -26,14 +26,22 @@ if (isset($_SESSION["user_id"]))
     <title>Home</title>
 </head>
 <body>
-    <h1>Home</h1>
-    
-    <?php if (isset($user)): ?>
-        <p>Hello <?= htmlspecialchars($user["name"]) ?></p>
-        <p><a href="logout.php">Logout</a></p>
-    <?php else: ?>
-        <p><a href="login.php">Login</a> or <a href="signup.html">Register</a></p>
-    <?php endif; ?>
+    <div class="head">
+        <h1>Home</h1>
+            
+            <div class="topbar">
+                <?php if (isset($user)): ?>
+                    <p>Hello <?= htmlspecialchars($user["name"]) ?></p>
+                    <p><a href="logout.php">Logout</a></p>
+                <?php else: ?>
+            </div>    
+            
+            <div class="notlogedin">
+                    <p><a href="login.php">Login</a> or <a href="signup.html">Register</a></p>
+                <?php endif; ?>
+            </div>    
+    </div> 
+
 
 </body>
 </html>
