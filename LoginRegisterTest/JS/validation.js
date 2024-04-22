@@ -3,7 +3,8 @@ const validation = new JustValidate("#signup");
 validation
     .addField("#name", [
         {
-            rule: "required"
+            rule: "required",
+            errorMessage: "Name is required" // Typo corrected
         }
     ])
     .addField("#email", [
@@ -14,16 +15,12 @@ validation
             rule: "email"
         },
         {
-            validator: (value) => () => {
+            validator: (value) => {
                 return fetch("validate-email.php?email=" + encodeURIComponent(value))
-                       .then(function(response) {
-                           return response.json();
-                       })
-                       .then(function(json) {
-                           return json.available;
-                       });
+                       .then(response => response.json())
+                       .then(json => json.available);
             },
-            errorMessage: "email already taken"
+            errorMessage: "Email already taken"
         }
     ])
     .addField("#password", [
@@ -45,5 +42,3 @@ validation
     .onSuccess((event) => {
         document.getElementById("signup").submit();
     });
-    
-  
