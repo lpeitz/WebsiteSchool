@@ -1,10 +1,7 @@
-const validation = new JustValidate("#signup");
-
 validation
     .addField("#name", [
         {
-            rule: "required",
-            errorMessage: "Name is required" // Typo corrected
+            rule: "required"
         }
     ])
     .addField("#email", [
@@ -15,12 +12,16 @@ validation
             rule: "email"
         },
         {
-            validator: (value) => {
+            validator: (value) => () => {
                 return fetch("validate-email.php?email=" + encodeURIComponent(value))
-                       .then(response => response.json())
-                       .then(json => json.available);
+                       .then(function(response) {
+                           return response.json();
+                       })
+                       .then(function(json) {
+                           return json.available;
+                       });
             },
-            errorMessage: "Email already taken"
+            errorMessage: "email already taken"
         }
     ])
     .addField("#password", [
